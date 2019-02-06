@@ -1,34 +1,46 @@
 const net = require('net')
 
-let clientIndexIterator = 0
-const clientMap = {}
+const clientInstColl = {
+  _i: 0,
+  add: function (c) {
+    const i = this._i++ // get index and increment for next add call
+    this[i] = c // assign client socket instance to collection
 
-/**
- * Add client socket connection event handlers
- * @param {net.Socket} client
- */
-function addClientEventHandlers (client, index) {
-  client.on('end', () => {
-    console.log(`client ${index} disconnected`)
-    delete clientMap[index]
-  })
+    console.log(`client ${i} connected`)
+
+    c.on('data', buf => {
+      const data = buf.toString()
+      if (data.match(/^(chat:)/)) {
+        sendMessage(data.substring(6))
+      }
+    })
+
+    c.on('end', () => {
+      console.log(`client ${i} disconnected`)
+      this.remove(i) // delete self from collection
+    })
+  },
+  remove: function (i) {
+    delete this[i]
+  }
 }
 
-function getClientIndex () {
-  return clientIndexIterator++
+function sendMessage (str) {
+  for (let i = 0; i < clientInstColl._i; i++) {
+    if (clientInstColl.hasOwnProperty(i)) {
+      clientInstColl[i].write(str)
+    }
+  }
 }
 
 const server = net.createServer()
 
 server.on('connection', client => {
-  const clientIndex = getClientIndex()
+  clientInstColl.add(client)
 
-  clientMap[clientIndex] = client
-  addClientEventHandlers(client, clientIndex)
-  console.log(`client ${clientIndex} connected`)
-  client.write(`You are client ${clientIndex}`)
+  client.write(`Hello client!\n`)
 
-  client.pipe(client) // echo
+  // client.pipe(client) // echo
 })
 
 server.on('error', err => {

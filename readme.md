@@ -18,3 +18,4 @@ Users will launch a client script that allows them to run a couple of predefined
 - `chat <message>` send message to server
 - `disconnect` disconnect from current server (and logout of current user if still logged in)
 - `logout` logout of current user but stay connected to server
+- `help` list available commands and what they do
