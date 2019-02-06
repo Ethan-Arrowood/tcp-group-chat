@@ -1,0 +1,14 @@
+{
+  "name": "tcp-group-chat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "npx standard --verbose **/*.js | npx snazzy",
+    "lint:fix": "npx standard --fix **/*.js"
+  },
+  "keywords": [],
+  "author": "Ethan Arrowood",
+  "license": "ISC"
+}
