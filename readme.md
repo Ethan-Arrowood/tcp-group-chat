@@ -2,8 +2,6 @@
 
 A group chat client-server application built on raw TCP sockets.
 
-JSDocs [Documentation](https://ethan-arrowood.github.io/tcp-group-chat)
-
 ## How to use
 1. Run tcp server `node server.js`
 2. Connect via `telnet` or `nc`
@@ -30,3 +28,14 @@ Users will launch a client script that allows them to run a couple of predefined
 - `disconnect` disconnect from current server (and logout of current user if still logged in)
 - `logout` logout of current user but stay connected to server
 - `help` list available commands and what they do
+
+## Documentation
+
+### Server
+TCP Group Chat Server. This module contains classes and methods related to the 'server' part of the TCP client-server architecture. It utilizes a single dependency, the _net_ core module from Node.js.
+#### ProcessCommand
+- _constructor_
+  Creates a ProcessCommand instance. This is a proxied class object that is used to process messages from TCP client sockets. The ClientInstanceCollection constructor implements an instance of this class for its internal use.
+- _[default]_
+  Default command handler. This function is implemented as an ES6 Proxy get trap. If the prop argument (p) does not match one existing on processCommand it will return a console log statement wrapped in a noop function.
+#### 

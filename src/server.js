@@ -1,23 +1,9 @@
 const net = require('net')
 
-/**
- * processCommand is an object that returns functions
- * to be used when a client socket connection receives
- * data. It is called via the 'data' event handler.
- *
- * @namespace processCommand
- */
 class _ProcessCommand {
   constructor (clientInstanceCollection) {
     this.clientInstanceCollection = clientInstanceCollection
   }
-  /**
-   * This method broadcasts a message to all other nodes
-   * connected to the TCP server
-   *
-   * @memberof processCommand
-   * @method chat
-   */
   chat (index, args) {
     for (let { c, i } of this.clientInstanceCollection) {
       if (i !== index) c.write(`Client ${index}: ${args[0].trim()}\n`)
@@ -32,15 +18,6 @@ class _ProcessCommand {
 }
 
 const ProcessCommand = new Proxy(_ProcessCommand, {
-  /**
-   * Default command handler. This function is implemented
-   * as an ES6 Proxy get trap. If the prop argument (p) does not
-   * match one existing on processCommand it will return a console
-   * log statement wrapped in a noop function.
-   *
-   * @memberof processCommand
-   * @method default
-   */
   get: (o, p) => {
     return o.hasOwnProperty(p)
       ? o[p]
