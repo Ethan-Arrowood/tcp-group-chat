@@ -1,15 +1,20 @@
 {
   "name": "tcp-group-chat",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "0.1.0",
+  "description": "Group Chat client-server implemented on TCP sockets and streams.",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npx standard --verbose **/*.js | npx snazzy",
     "lint:fix": "npx standard --fix **/*.js",
     "docs:generate": "npx jsdoc -d docs *.js README.md"
   },
-  "keywords": [],
+  "keywords": [
+    "tcp",
+    "socket programming",
+    "network programming",
+    "nodejs",
+    "javascript"
+  ],
   "author": "Ethan Arrowood",
-  "license": "ISC"
+  "license": "MIT"
 }
