@@ -7,7 +7,6 @@
     "run": "node index.js",
     "lint": "npx standard --verbose **/*.js | npx snazzy",
     "lint:fix": "npx standard --fix **/*.js",
-    "docs:generate": "npx jsdoc -d docs src/*.js README.md",
     "test": "npx jest test/*.js"
   },
   "keywords": [
