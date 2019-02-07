@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npx standard --verbose **/*.js | npx snazzy",
-    "lint:fix": "npx standard --fix **/*.js"
+    "lint:fix": "npx standard --fix **/*.js",
+    "docs:generate": "npx jsdoc -d docs *.js README.md"
   },
   "keywords": [],
   "author": "Ethan Arrowood",
