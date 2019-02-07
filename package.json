@@ -2,11 +2,13 @@
   "name": "tcp-group-chat",
   "version": "0.1.0",
   "description": "Group Chat client-server implemented on TCP sockets and streams.",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
+    "run": "node index.js",
     "lint": "npx standard --verbose **/*.js | npx snazzy",
     "lint:fix": "npx standard --fix **/*.js",
-    "docs:generate": "npx jsdoc -d docs *.js README.md"
+    "docs:generate": "npx jsdoc -d docs src/*.js README.md",
+    "test": "npx jest test/*.js"
   },
   "keywords": [
     "tcp",

@@ -7,7 +7,10 @@ const net = require('net')
  *
  * @namespace processCommand
  */
-const processCommand = new Proxy({
+class _ProcessCommand {
+  constructor (clientInstanceCollection) {
+    this.clientInstanceCollection = clientInstanceCollection
+  }
   /**
    * This method broadcasts a message to all other nodes
    * connected to the TCP server
@@ -15,18 +18,20 @@ const processCommand = new Proxy({
    * @memberof processCommand
    * @method chat
    */
-  chat: (index, args) => {
-    for (let { c, i } of clientInstColl) {
-      if (i !== index) c.write(`Client ${i}: ${args[0].trim()}\n`)
+  chat (index, args) {
+    for (let { c, i } of this.clientInstanceCollection) {
+      if (i !== index) c.write(`Client ${index}: ${args[0].trim()}\n`)
     }
-  },
-  connect: () => {},
-  disconnect: () => {},
-  help: () => {},
-  list: () => {},
-  login: () => {},
-  logout: () => {}
-}, {
+  }
+  connect () {}
+  disconnect () {}
+  help () {}
+  list () {}
+  login () {}
+  logout () {}
+}
+
+const ProcessCommand = new Proxy(_ProcessCommand, {
   /**
    * Default command handler. This function is implemented
    * as an ES6 Proxy get trap. If the prop argument (p) does not
@@ -43,10 +48,17 @@ const processCommand = new Proxy({
   }
 })
 
-const clientInstColl = {
-  _i: 0,
-  length: () => this._i,
-  add: function (c) {
+class ClientInstanceCollection {
+  constructor () {
+    this._i = 0
+    this.processCommand = new ProcessCommand(this)
+  }
+
+  length () {
+    return this._i
+  }
+
+  add (c) {
     const i = this._i++ // get index and increment for next add call
     this[i] = c // assign client socket instance to collection
 
@@ -55,18 +67,20 @@ const clientInstColl = {
     c.on('data', buf => {
       const data = buf.toString()
       const [ , command, ...args ] = data.match(/^(\w+)(.*)/)
-      processCommand[command](i, args)
+      this.processCommand[command](i, args)
     })
 
     c.on('end', () => {
       console.log(`client ${i} disconnected`)
       this.remove(i) // delete self from collection
     })
-  },
-  remove: function (i) {
+  }
+
+  remove (i) {
     delete this[i]
-  },
-  [Symbol.iterator]: function * () {
+  }
+
+  * [Symbol.iterator] () {
     let i = 0
     while (i < this._i) {
       if (this.hasOwnProperty(i)) yield { i, c: this[i++] }
@@ -74,20 +88,29 @@ const clientInstColl = {
   }
 }
 
-const server = net.createServer()
+function DefaultChatServer () {
+  const server = net.createServer()
+  const cic = new ClientInstanceCollection()
 
-server.on('connection', client => {
-  clientInstColl.add(client)
+  server.on('connection', client => {
+    cic.add(client)
+    client.write(`Hello client!\n`)
+    // client.pipe(client) // echo
+  })
 
-  client.write(`Hello client!\n`)
+  server.on('error', err => {
+    throw err
+  })
 
-  // client.pipe(client) // echo
-})
+  server.listen(8124, () => {
+    console.log('server bound')
+  })
 
-server.on('error', err => {
-  throw err
-})
+  return server
+}
 
-server.listen(8124, () => {
-  console.log('server bound')
-})
+module.exports = {
+  ChatServer: DefaultChatServer,
+  ClientInstanceCollection,
+  ProcessCommand
+}
