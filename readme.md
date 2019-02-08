@@ -31,11 +31,10 @@ Users will launch a client script that allows them to run a couple of predefined
 
 ## Documentation
 
-### Server
-TCP Group Chat Server. This module contains classes and methods related to the 'server' part of the TCP client-server architecture. It utilizes a single dependency, the _net_ core module from Node.js.
-#### ProcessCommand
-- _constructor_
-  Creates a ProcessCommand instance. This is a proxied class object that is used to process messages from TCP client sockets. The ClientInstanceCollection constructor implements an instance of this class for its internal use.
-- _[default]_
-  Default command handler. This function is implemented as an ES6 Proxy get trap. If the prop argument (p) does not match one existing on processCommand it will return a console log statement wrapped in a noop function.
-#### 
+### CommandProcessor.js
+
+### IterableCollection.js
+
+### ClientInstanceCollection.js
+
+### DefaultChatServer.js

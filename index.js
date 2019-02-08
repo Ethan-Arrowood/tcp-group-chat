@@ -1,3 +1,3 @@
-const { ChatServer } = require('./src/server')
+const DefaultChatServer = require('./src/DefaultChatServer')
 
-ChatServer()
+DefaultChatServer()
