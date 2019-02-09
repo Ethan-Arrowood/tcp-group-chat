@@ -1,5 +1,4 @@
 /* global test describe expect */
-// const net = require('net')
 const CommandProcessor = require('../src/CommandProcessor')
 const IterableCollection = require('../src/IterableCollection')
 
@@ -29,7 +28,7 @@ describe('CommandProcessor', () => {
     // TODO - Use symbolic errors
     expect(() => {
       CommandProcessor.chat({})
-    }).toThrow('cic argument must be an instance of IterableCollection')
+    }).toThrow('coll argument must be an instance of IterableCollection')
 
     expect(() => {
       CommandProcessor.chat(new IterableCollection(), 'not a number')
@@ -45,10 +44,14 @@ describe('CommandProcessor', () => {
   })
 
   test('should not throw on unknown command calls', () => {
+    const _log = console.log
+    console.log = () => {}
     // TODO - Create a controlled 'unknown' command for testing purposes
     expect(() => {
       CommandProcessor.doesNotExist()
     }).not.toThrow()
+
+    console.log = _log
   })
 
   test('should noop on unknown command calls', () => {

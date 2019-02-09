@@ -1,5 +1,5 @@
 const net = require('net')
-const ClientCollection = require('./Clientollection')
+const ClientCollection = require('./ClientCollection')
 
 module.exports = function DefaultChatServer () {
   const server = net.createServer()

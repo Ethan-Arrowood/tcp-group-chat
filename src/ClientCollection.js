@@ -1,9 +1,10 @@
+const assert = require('assert')
 const CommandProcessor = require('./CommandProcessor')
 const IterableCollection = require('./IterableCollection')
 
 module.exports = class ClientCollection extends IterableCollection {
   add (c) {
-    const i = this._i++ // get index and increment for next add call
+    const i = this.getIndex() // get index and increment for next add call
     this[i] = c // assign client socket instance to collection
 
     console.log(`client ${i} connected`)
@@ -21,6 +22,10 @@ module.exports = class ClientCollection extends IterableCollection {
   }
 
   remove (i) {
-    delete this[i]
+    i = parseInt(i)
+    assert(Number.isInteger(i), 'i should be an integer')
+    if (this.hasOwnProperty(i)) {
+      delete this[i]
+    }
   }
 }
