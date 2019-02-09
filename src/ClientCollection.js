@@ -1,7 +1,7 @@
 const CommandProcessor = require('./CommandProcessor')
 const IterableCollection = require('./IterableCollection')
 
-module.exports = class ClientInstanceCollection extends IterableCollection {
+module.exports = class ClientCollection extends IterableCollection {
   add (c) {
     const i = this._i++ // get index and increment for next add call
     this[i] = c // assign client socket instance to collection

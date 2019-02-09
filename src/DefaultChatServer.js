@@ -1,12 +1,12 @@
 const net = require('net')
-const ClientInstanceCollection = require('./ClientInstanceCollection')
+const ClientCollection = require('./Clientollection')
 
 module.exports = function DefaultChatServer () {
   const server = net.createServer()
-  const cic = new ClientInstanceCollection()
+  const coll = new ClientCollection()
 
   server.on('connection', client => {
-    cic.add(client)
+    coll.add(client)
     client.write(`Hello client!\n`)
     // client.pipe(client) // echo
   })
