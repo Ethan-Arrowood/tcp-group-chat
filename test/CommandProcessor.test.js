@@ -19,9 +19,7 @@ describe('CommandProcessor', () => {
       'logout'
     ]
 
-    expect(Object.keys(CommandProcessor)).toEqual(
-      expect.arrayContaining(commands)
-    )
+    expect(Object.keys(CommandProcessor)).toStrictEqual(commands)
   })
 
   test('should assert standard arguments for command method calls', () => {

@@ -11,6 +11,11 @@ const _CommandProcessor = {
   },
   connect () {},
   disconnect () {},
+  echo (coll, index, args) {
+    assert(typeof args[0] === 'string', 'args[0] must be a string')
+
+    coll[index].write(`Client ${index} echo: ${args[0].trim()}\n`)
+  },
   help () {},
   list () {},
   login () {},
