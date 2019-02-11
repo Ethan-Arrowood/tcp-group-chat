@@ -21,21 +21,8 @@ describe('IterableCollection', () => {
   })
 
   describe('symbolic iterator', () => {
-    function createIC () {
-      const ic = new IterableCollection()
-
-      Object.defineProperty(ic, 'add', {
-        value: function (o) {
-          const i = this.getIndex()
-          this[i] = o
-        }
-      })
-
-      return ic
-    }
-
     test('should return an object with props i and c', () => {
-      const ic = createIC()
+      const ic = new IterableCollection()
       ic.add({})
       const res = [...ic]
       expect(typeof res[0]).toBe('object')
@@ -44,7 +31,7 @@ describe('IterableCollection', () => {
     })
 
     test('should return items added in order', () => {
-      const ic = createIC()
+      const ic = new IterableCollection()
       const items = [ 'a', 'b', 'c' ]
       items.forEach(i => ic.add(i))
       const res = [...ic]
