@@ -10,6 +10,9 @@ telnet localhost 8124
 ```
 3. Send messages in chat by writing `chat <message>` from the client connections
 
+[Test Coverage](./coverage/lcov-report/index.html)
+
+
 ## First thoughts
 Users will launch a client script that allows them to run a couple of predefined commands:
 - `connect <server>` used to connect to a tcp chat server
