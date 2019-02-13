@@ -3,15 +3,17 @@
 A group chat client-server application built on raw TCP sockets.
 
 ## How to use
-1. Run tcp server `node server.js`
+1. Run tcp server `node index.js`
 2. Connect via `telnet` or `nc`
 ```bash
 telnet localhost 8124
 ```
-3. Send messages in chat by writing `chat <message>` from the client connections
+3. Send messages in chat by writing `chat <message>` or `echo <message>` from the client connections
 
 [GitHub](https://github.com/Ethan-Arrowood/tcp-group-chat)
+
 [Test Coverage](./coverage/lcov-report/index.html)
+
 [Documentation](https://ethan-arrowood.github.io/tcp-group-chat/)
 
 
