@@ -15,7 +15,7 @@ module.exports = function DefaultChatServer () {
     throw err
   })
 
-  server.listen(8124, () => {
+  server.listen(process.env.PORT || 8124, () => {
     console.log('server bound')
     console.log(server.address())
   })

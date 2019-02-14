@@ -4,7 +4,7 @@
   "description": "Group Chat client-server implemented on TCP sockets and streams.",
   "main": "index.js",
   "engines": {
-    "nodejs": "11.9.0"
+    "node": "11.9.0"
   },
   "scripts": {
     "start": "node index.js",
