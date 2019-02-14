@@ -17,6 +17,7 @@ module.exports = function DefaultChatServer () {
 
   server.listen(8124, () => {
     console.log('server bound')
+    console.log(server.address())
   })
 
   return server
