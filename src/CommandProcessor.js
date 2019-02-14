@@ -21,7 +21,17 @@ const _CommandProcessor = {
     const username = getUsername(coll, index)
     coll[index].write(`${username} echo: ${args[0].trim()}\n`)
   },
-  help () {},
+  help (coll, index, args) {
+    coll[index].write(`Commands available:
+    chat <message> - sends a message in the chat server
+    [not available] connect <channel> - connects to a chat server channel
+    [not available] disconnect - disconnect yourself from the channel
+    echo <message> - echo message back to yourself
+    help - list all commands available
+    list - list users connected to chat server
+    login <username> - login, prepends messages with username
+    logout - logs out from username, removes username from messages\n`)
+  },
   list (coll, index, args) {
     let users = 'Users: '
     for (let { i } of coll) {

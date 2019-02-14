@@ -3,8 +3,11 @@
   "version": "0.1.0",
   "description": "Group Chat client-server implemented on TCP sockets and streams.",
   "main": "index.js",
+  "engines": {
+    "nodejs": "11.9.0"
+  },
   "scripts": {
-    "run": "node index.js",
+    "start": "node index.js",
     "lint": "standard --verbose **/*.js | snazzy",
     "lint:fix": "standard --fix **/*.js",
     "test": "jest --verbose test/*.test.js",
